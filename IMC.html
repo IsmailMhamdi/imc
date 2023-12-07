@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans&family=Poppins:ital,wght@0,300;1,200&family=Roboto:wght@300;400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+.blur-load{
+    background-size:cover;
+    background-position:center;
+    
+    width: 25%;
+}
+.des{
+  width: 40%;
+
+}
+.blur-load.loaded > img{
+    opacity: 1;
+}
+.blur-load > img{
+    opacity: 0;
+    transition:opacity 200ms ease-in-out;
+}
+        body{
+            background-image: url('creative-fitness-concept-with-clipboard.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <div class="w-25 container p-3 text-center" style="margin-top:250px ;">
+        <form  onsubmit="return calcul()">
+           
+        <h1 class="mb-5 fw-bolder text-primary" >IMC</h1>
+        <div class="form-floating mb-3 mt-3 text-dark">
+            <input type="number" class="form-control" placeholder="Taille en centimeter" max="250" min="50" id="taille" required>
+            <label for="taille">Taille en centimeter</label>
+          </div>
+          <div class="form-floating mb-3 mt-3 text-dark">
+            <input type="number" class="form-control" placeholder="Poids en Kg" id="poids" max="200" min="5" required>
+            <label for="poids">Poids en Kg</label>
+          </div>
+       <div class="d-flex justify-content-center m-2"><input type="submit" class="btn btn-success w-50 " value="Calcul" ></div> 
+</form>
+    </div>
+    <div id="alert"></div>
+    <script>
+  
+function calcul(){
+ let t=parseFloat(document.getElementById('taille').value*0.01)
+ let p=parseFloat(document.getElementById('poids').value)
+ let s=p/((t*t))
+if(s<16.5){
+    document.getElementById('alert').setAttribute('class','alert alert-danger w-25 container fw-bold mt-2')
+    document.getElementById('alert').innerHTML='! Maigreur extrême'
+    return false
+}
+else if(s>=16.5 && s<=18.5 ){
+    document.getElementById('alert').setAttribute('class','alert alert-warning w-25 container fw-bold mt-2')
+    document.getElementById('alert').innerHTML='! Maigreur '
+    return false
+}
+else if(s>18.5 && s<=25){
+   
+   document.getElementById('alert').setAttribute('class','alert alert-success w-25 container fw-bold mt-2')
+   document.getElementById('alert').innerHTML='! Corpulence normale'
+   return false
+}
+else if(s>25 && s<30 ){
+    document.getElementById('alert').setAttribute('class','alert alert-warning w-25 container fw-bold mt-2')
+    document.getElementById('alert').innerHTML='! Surpoids '
+    return false
+}
+else if(s>=30 && s<35 ){
+    document.getElementById('alert').setAttribute('class','alert alert-danger w-25 container fw-bold mt-2')
+    document.getElementById('alert').innerHTML='! Obésité modérée '
+    return false
+}
+else if(s>=35 && s<=40 ){
+    document.getElementById('alert').setAttribute('class','alert alert-danger w-25 container fw-bold mt-2')
+    document.getElementById('alert').innerHTML='! Obésité sévère '
+    return false
+}
+else if(s>40){
+    document.getElementById('alert').setAttribute('class','alert alert-danger w-25 container fw-bold mt-2')
+    document.getElementById('alert').innerHTML='! Obésité morbide '
+    return false
+}
+
+
+}
+    </script>
+    <script>
+        const blurDivs= document.querySelectorAll(".blur-load");
+        blurDivs.forEach( div => {
+            const img = div.querySelector("img")
+            function loaded() {
+                div.classList.add("loaded")
+            }
+            if(img.complete){
+                loaded()
+            }
+            else{
+                img.addEventListener("load", loaded)
+            }
+
+        } 
+        )
+    </script>
+</body>
+</html>
